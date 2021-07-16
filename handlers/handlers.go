@@ -13,19 +13,16 @@ var views = jet.NewSet(
 	jet.InDevelopmentMode(), // remove in production
 )
 
-
 var upgrader = websocket.Upgrader{
-	ReadBufferSize:    4096,
-	WriteBufferSize:   4096,
-	EnableCompression: true,
+	ReadBufferSize:  4096,
+	WriteBufferSize: 4096,
 	CheckOrigin: func(r *http.Request) bool {
 		return true
 	},
 }
 
-
 func Home(w http.ResponseWriter, r *http.Request) {
-	err:= renderPage(w, "home.jet", nil)
+	err := renderPage(w, "home.jet", nil)
 	if err != nil {
 		log.Println(err)
 	}
@@ -33,7 +30,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func renderPage(w http.ResponseWriter, tmpl string, data jet.VarMap) error {
-	views, err:= views.GetTemplate(tmpl)
+	views, err := views.GetTemplate(tmpl)
 	if err != nil {
 		log.Println(err)
 		return err
@@ -49,8 +46,8 @@ type WsJsonResponse struct {
 	MessageType string `json:"message_type"`
 }
 
-func WsEndpoint(w http.ResponseWriter, r *http.Request)  {
-	ws, err:= upgrader.Upgrade(w,r, nil)
+func WsEndpoint(w http.ResponseWriter, r *http.Request) {
+	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 	}
@@ -64,6 +61,5 @@ func WsEndpoint(w http.ResponseWriter, r *http.Request)  {
 	if err != nil {
 		log.Println(err)
 	}
-	
-	
+
 }
