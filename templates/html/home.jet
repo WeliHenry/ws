@@ -40,6 +40,7 @@
                 <label for="message">Message:</label>
                 <input type="text" id="message" autocomplete="off" class="form-control">
             </div>
+
             <input type="hidden" name="action" id="action">
             <hr>
             <div id="output" class="chatbox"></div>
@@ -67,6 +68,8 @@
         }
         socket.onmessage = function (msg) {
             console.log(msg)
+            let j = JSON.parse(msg.data)
+            console.log(j)
         }
     })
 </script>
